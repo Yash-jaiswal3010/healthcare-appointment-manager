@@ -330,7 +330,7 @@ Symptoms:
 Application URL
 
 ```
-https://your-render-url.onrender.com
+https://healthcare-appointment-manager-skvt.onrender.com
 ```
 
 ---
