@@ -1,12 +1,13 @@
 const token = localStorage.getItem("access");
+const API_BASE = "/api";
 
 async function loadDoctorProfile() {
 
     const response = await fetch(
-        "http://127.0.0.1:8000/api/doctors/profile/",
+        `${API_BASE}/doctors/profile/`,
         {
-            headers:{
-                Authorization:"Bearer "+token
+            headers: {
+                Authorization: "Bearer " + token
             }
         }
     );
@@ -17,7 +18,7 @@ async function loadDoctorProfile() {
 
     console.log("Response:", doctor);
 
-    if(!response.ok){
+    if (!response.ok) {
         alert(JSON.stringify(doctor));
         return;
     }

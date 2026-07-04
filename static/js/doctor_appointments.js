@@ -1,9 +1,10 @@
 const token = localStorage.getItem("access");
+const API_BASE = "/api";
 
 async function loadAppointments() {
 
     const response = await fetch(
-        "http://127.0.0.1:8000/api/appointments/doctor/",
+        `${API_BASE}/appointments/doctor/`,
         {
             headers: {
                 Authorization: "Bearer " + token
@@ -21,45 +22,30 @@ async function loadAppointments() {
 
         tbody.innerHTML += `
         <tr>
-
             <td>${app.patient_name}</td>
-
             <td>${app.appointment_date}</td>
-
             <td>${app.appointment_time}</td>
 
             <td>
-
                 <select id="status-${app.id}">
-
-                    <option value="PENDING" ${app.status==="PENDING"?"selected":""}>Pending</option>
-
-                    <option value="CONFIRMED" ${app.status==="CONFIRMED"?"selected":""}>Confirmed</option>
-
-                    <option value="COMPLETED" ${app.status==="COMPLETED"?"selected":""}>Completed</option>
-
-                    <option value="CANCELLED" ${app.status==="CANCELLED"?"selected":""}>Cancelled</option>
-
+                    <option value="PENDING" ${app.status === "PENDING" ? "selected" : ""}>Pending</option>
+                    <option value="CONFIRMED" ${app.status === "CONFIRMED" ? "selected" : ""}>Confirmed</option>
+                    <option value="COMPLETED" ${app.status === "COMPLETED" ? "selected" : ""}>Completed</option>
+                    <option value="CANCELLED" ${app.status === "CANCELLED" ? "selected" : ""}>Cancelled</option>
                 </select>
-
             </td>
 
             <td>${app.symptoms}</td>
 
             <td>
-
                 <textarea id="notes-${app.id}" rows="4">${app.doctor_notes || ""}</textarea>
-
             </td>
 
             <td>
-
                 <button onclick="updateAppointment(${app.id})">
                     Update
                 </button>
-
             </td>
-
         </tr>
         `;
 
@@ -67,57 +53,34 @@ async function loadAppointments() {
 
 }
 
-async function updateAppointment(id){
+async function updateAppointment(id) {
 
-    const status =
-        document.getElementById(`status-${id}`).value;
-
-    const doctor_notes =
-        document.getElementById(`notes-${id}`).value;
+    const status = document.getElementById(`status-${id}`).value;
+    const doctor_notes = document.getElementById(`notes-${id}`).value;
 
     const response = await fetch(
-
-        `http://127.0.0.1:8000/api/appointments/doctor/${id}/`,
-
+        `${API_BASE}/appointments/doctor/${id}/`,
         {
-
-            method:"PATCH",
-
-            headers:{
-
-                Authorization:"Bearer "+token,
-
-                "Content-Type":"application/json"
-
+            method: "PATCH",
+            headers: {
+                Authorization: "Bearer " + token,
+                "Content-Type": "application/json"
             },
-
-            body:JSON.stringify({
-
+            body: JSON.stringify({
                 status,
                 doctor_notes
-
             })
-
         }
-
     );
 
     const data = await response.json();
 
-    if(response.ok){
-
+    if (response.ok) {
         alert("Appointment Updated Successfully.");
-
         loadAppointments();
-
-    }
-
-    else{
-
+    } else {
         alert(JSON.stringify(data));
-
     }
-
 }
 
 loadAppointments();
