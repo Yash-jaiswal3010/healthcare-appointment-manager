@@ -1,3 +1,5 @@
+const API_BASE = "/api";
+
 const token = localStorage.getItem("access");
 
 if (!token) {
@@ -13,7 +15,7 @@ async function loadDoctors() {
     try {
 
         const response = await fetch(
-            "http://127.0.0.1:8000/api/doctors/",
+            `${API_BASE}/doctors/`,
             {
                 headers: {
                     "Authorization": "Bearer " + token,
@@ -62,70 +64,58 @@ loadDoctors();
 // Book Appointment
 // ----------------------
 
-const form =
-document.getElementById("appointmentForm");
+const form = document.getElementById("appointmentForm");
 
-form.addEventListener("submit", async function(e){
+form.addEventListener("submit", async function (e) {
 
     e.preventDefault();
 
-    const body={
+    const body = {
 
-        doctor:
-        document.getElementById("doctor").value,
+        doctor: document.getElementById("doctor").value,
 
-        appointment_date:
-        document.getElementById("appointment_date").value,
+        appointment_date: document.getElementById("appointment_date").value,
 
-        appointment_time:
-        document.getElementById("appointment_time").value,
+        appointment_time: document.getElementById("appointment_time").value,
 
-        symptoms:
-        document.getElementById("symptoms").value,
+        symptoms: document.getElementById("symptoms").value,
 
     };
 
-    const response=await fetch(
+    try {
 
-        "http://127.0.0.1:8000/api/appointments/",
+        const response = await fetch(
+            `${API_BASE}/appointments/`,
+            {
+                method: "POST",
 
-        {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + token,
+                },
 
-            method:"POST",
+                body: JSON.stringify(body),
+            }
+        );
 
-            headers:{
+        const data = await response.json();
 
-                "Content-Type":"application/json",
+        if (response.ok) {
 
-                "Authorization":
-                "Bearer "+token,
+            alert("Appointment booked successfully!");
 
-            },
+            window.location.href = "/patient/appointments/";
 
-            body:JSON.stringify(body),
+        } else {
+
+            alert(JSON.stringify(data));
 
         }
 
-    );
+    } catch (error) {
 
-    const data=await response.json();
-
-    if(response.ok){
-
-        alert(
-            "Appointment booked successfully!"
-        );
-
-        window.location.href=
-        "/patient/appointments/";
-
-    }
-
-    else{
-
-        alert(
-            JSON.stringify(data)
-        );
+        console.error(error);
+        alert("Server Error");
 
     }
 
