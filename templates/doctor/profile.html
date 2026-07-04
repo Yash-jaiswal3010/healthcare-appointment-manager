@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Doctor Profile
+{% endblock %}
+
+{% block content %}
+
+<div class="card">
+
+<h2>Doctor Profile</h2>
+
+<hr><br>
+
+<p><b>Name:</b> <span id="doctor_name"></span></p>
+
+<p><b>Email:</b> <span id="email"></span></p>
+
+<p><b>Specialization:</b> <span id="specialization"></span></p>
+
+<p><b>Qualification:</b> <span id="qualification"></span></p>
+
+<p><b>Experience:</b> <span id="experience"></span></p>
+
+<p><b>Fee:</b> ₹<span id="fee"></span></p>
+
+<p><b>Hospital:</b> <span id="hospital"></span></p>
+
+<p><b>Bio:</b> <span id="bio"></span></p>
+
+</div>
+
+<script src="{% static 'js/doctor.js' %}"></script>
+
+{% endblock %}

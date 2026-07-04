@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Book Appointment
+{% endblock %}
+
+{% block content %}
+
+<div class="card">
+
+    <h2>Book Appointment</h2>
+
+    <hr><br>
+
+    <form id="appointmentForm">
+
+        <label><b>Select Doctor</b></label>
+
+        <select id="doctor" required>
+
+            <option value="">Select Doctor</option>
+
+        </select>
+
+        <label><b>Appointment Date</b></label>
+
+        <input
+            type="date"
+            id="appointment_date"
+            required
+        >
+
+        <label><b>Appointment Time</b></label>
+
+        <input
+            type="time"
+            id="appointment_time"
+            required
+        >
+
+        <label><b>Symptoms</b></label>
+
+        <textarea
+            id="symptoms"
+            rows="5"
+            placeholder="Describe your symptoms..."
+            required
+        ></textarea>
+
+        <br><br>
+
+        <button type="submit">
+
+            Book Appointment
+
+        </button>
+
+    </form>
+
+</div>
+
+<script src="{% static 'js/appointment.js' %}"></script>
+
+{% endblock %}

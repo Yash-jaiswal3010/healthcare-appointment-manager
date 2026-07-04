@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+My Appointments
+{% endblock %}
+
+{% block content %}
+
+<div class="card">
+
+    <h2>My Appointments</h2>
+
+    <hr><br>
+
+    <table id="appointmentTable">
+
+        <thead>
+
+            <tr>
+
+                <th>Doctor</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>AI Symptom Summary</th>
+                <th>Doctor Notes</th>
+                <th>Patient Summary</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<script src="{% static 'js/patient.js' %}"></script>
+
+{% endblock %}

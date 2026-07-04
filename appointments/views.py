@@ -24,6 +24,7 @@ from accounts.permissions import (
     IsPatientRole,
     IsDoctorRole,
 )
+from patients.models import Patient
 
 
 class AppointmentListCreateView(
@@ -32,10 +33,13 @@ class AppointmentListCreateView(
 
     permission_classes = [
         IsAuthenticated,
-        IsPatientRole,
+        
     ]
 
     def get_queryset(self):
+        print("==== get_queryset called ====")
+        print("User:", self.request.user)
+        print("Authenticated:", self.request.user.is_authenticated)
         return Appointment.objects.filter(
             patient=self.request.user.patient_profile
         )
@@ -55,8 +59,12 @@ class AppointmentListCreateView(
             raise_exception=True
         )
 
+        patient = Patient.objects.get(
+        user=request.user
+        )
+
         appointment = write_serializer.save(
-            patient=request.user.patient_profile
+        patient=patient
         )
 
         appointment.symptom_summary = generate_symptom_summary(
@@ -177,5 +185,4 @@ class DoctorAppointmentUpdateView(
             ).data,
             status=status.HTTP_200_OK,
         )
-    
     

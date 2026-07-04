@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Patient Profile
+{% endblock %}
+
+{% block content %}
+
+<div class="card">
+
+    <h2>Patient Profile</h2>
+
+    <hr><br>
+
+    <table>
+
+        <tr>
+            <th>Name</th>
+            <td id="name"></td>
+        </tr>
+
+        <tr>
+            <th>Email</th>
+            <td id="email"></td>
+        </tr>
+
+        <tr>
+            <th>Date of Birth</th>
+            <td id="dob"></td>
+        </tr>
+
+        <tr>
+            <th>Gender</th>
+            <td id="gender"></td>
+        </tr>
+
+        <tr>
+            <th>Blood Group</th>
+            <td>
+                <select id="blood_group" disabled>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <th>Phone Number</th>
+            <td>
+                <input
+                    type="text"
+                    id="phone"
+                    disabled
+                >
+            </td>
+        </tr>
+
+        <tr>
+            <th>Address</th>
+            <td>
+                <textarea
+                    id="address"
+                    rows="3"
+                    disabled
+                ></textarea>
+            </td>
+        </tr>
+
+        <tr>
+            <th>Emergency Contact</th>
+            <td>
+                <input
+                    type="text"
+                    id="emergency_contact"
+                    disabled
+                >
+            </td>
+        </tr>
+
+    </table>
+
+    <br>
+
+    <button onclick="enableEdit()">
+        Edit Profile
+    </button>
+
+    <button
+        id="saveBtn"
+        onclick="saveProfile()"
+        style="display:none;"
+    >
+        Save Changes
+    </button>
+
+    <button onclick="location.href='/patient/dashboard/'">
+        Back to Dashboard
+    </button>
+
+</div>
+
+<script src="{% static 'js/patient_profile.js' %}"></script>
+
+{% endblock %}

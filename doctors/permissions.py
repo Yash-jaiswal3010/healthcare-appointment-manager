@@ -1,5 +1,5 @@
-from .models import Role
-from doctors.models import DoctorAvailability
+from accounts.models import Role
+
 from rest_framework.permissions import BasePermission
 
 # by this a doctor can edit only their own availability

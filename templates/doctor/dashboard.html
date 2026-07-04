@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Doctor Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="card">
+
+    <h2>Doctor Dashboard</h2>
+
+    <hr><br>
+
+    <button onclick="location.href='/doctor/profile/'">
+        My Profile
+    </button>
+
+    <button onclick="location.href='/doctor/appointments/'">
+        My Appointments
+    </button>
+
+    <button onclick="logout()">
+        Logout
+    </button>
+
+</div>
+
+<script src="{% static 'js/auth.js' %}"></script>
+
+{% endblock %}

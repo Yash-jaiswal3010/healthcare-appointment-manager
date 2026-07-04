@@ -12,7 +12,27 @@ from .serializers import (
     AvailabilityReadSerializer,
     AvailabilityWriteSerializer,
 )
-from accounts.permissions import IsDoctorRole
+from accounts.permissions import IsDoctorRole,IsAdminRole
+from .permissions import IsAvailabilityOwner
+
+class DoctorProfileView(
+    generics.RetrieveUpdateAPIView
+):
+
+    permission_classes = [
+        IsAuthenticated,
+        IsDoctorRole,
+    ]
+
+    def get_object(self):
+        return self.request.user.doctor_profile
+
+    def get_serializer_class(self):
+
+        if self.request.method in ["PUT", "PATCH"]:
+            return DoctorWriteSerializer
+
+        return DoctorReadSerializer
 
 class DoctorListCreateView(generics.ListCreateAPIView):
 
@@ -35,7 +55,7 @@ class DoctorListCreateView(generics.ListCreateAPIView):
                 IsAdminRole(),
             ]
 
-        return []
+        return [IsAuthenticated()]
     
 
 class DoctorDetailView(generics.RetrieveUpdateDestroyAPIView):
@@ -63,7 +83,7 @@ class DoctorDetailView(generics.RetrieveUpdateDestroyAPIView):
                 IsAdminRole(),
             ]
 
-        return []
+        return [IsAuthenticated()]
     
 
 class AvailabilityListCreateView(generics.ListCreateAPIView):
@@ -85,7 +105,7 @@ class AvailabilityListCreateView(generics.ListCreateAPIView):
                 IsDoctorRole(),
             ]
 
-        return []
+        return [IsAuthenticated()]
 
     def perform_create(self, serializer):
 
@@ -124,4 +144,4 @@ class AvailabilityDetailView(
                 IsAvailabilityOwner(),
             ]
 
-        return []
+        return [IsAuthenticated()]

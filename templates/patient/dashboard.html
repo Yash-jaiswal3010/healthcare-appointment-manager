@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Patient Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="card">
+
+    <h2>Patient Dashboard</h2>
+
+    <hr>
+
+    <h3>
+        Welcome,
+        <span id="username"></span> 👋
+    </h3>
+
+    <br>
+
+    <button onclick="window.location.href='/patient/book/'">
+        📅 Book Appointment
+    </button>
+
+    <br><br>
+
+    <button onclick="window.location.href='/patient/appointments/'">
+        📋 My Appointments
+    </button>
+
+    <br><br>
+
+    <button onclick=window.location.href="/patient/profile/">
+        👤 My Profile
+    </button>
+
+    <br><br>
+
+    <button onclick="logout()">
+        🚪 Logout
+    </button>
+
+</div>
+
+<script>
+
+if (!localStorage.getItem("access")) {
+    window.location.href = "/";
+}
+
+document.getElementById("username").innerText =
+    localStorage.getItem("name");
+
+function logout() {
+
+    localStorage.clear();
+
+    window.location.href="/";
+
+}
+
+</script>
+
+{% endblock %}

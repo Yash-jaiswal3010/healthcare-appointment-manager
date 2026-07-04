@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Complete Profile
+{% endblock %}
+
+{% block content %}
+
+<div class="card">
+
+<h2>Complete Your Profile</h2>
+
+<hr><br>
+
+<form id="profileForm">
+
+<label>Date of Birth</label>
+<input type="date" id="dob" required>
+
+<label>Gender</label>
+<select id="gender">
+    <option value="MALE">Male</option>
+    <option value="FEMALE">Female</option>
+    <option value="OTHER">Other</option>
+</select>
+
+<label>Blood Group</label>
+<select id="blood_group">
+    <option value="A+">A+</option>
+    <option value="A-">A-</option>
+    <option value="B+">B+</option>
+    <option value="B-">B-</option>
+    <option value="AB+">AB+</option>
+    <option value="AB-">AB-</option>
+    <option value="O+">O+</option>
+    <option value="O-">O-</option>
+</select>
+
+<label>Phone Number</label>
+<input type="text" id="phone">
+
+<label>Address</label>
+<textarea id="address"></textarea>
+
+<label>Emergency Contact</label>
+<input type="text" id="emergency">
+
+<br><br>
+
+<button type="submit">
+Save Profile
+</button>
+
+</form>
+
+</div>
+
+<script src="{% static 'js/create_profile.js' %}"></script>
+
+{% endblock %}

@@ -1,5 +1,6 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
+from django.shortcuts import get_object_or_404
 
 from .models import Patient
 from .serializers import (
@@ -18,9 +19,11 @@ class PatientProfileView(
         IsPatientRole,
     ]
     def get_object(self):
-        print("Logged in user:", self.request.user.email)
-        print("Role:", self.request.user.role)
-        return self.request.user.patient_profile
+        
+         return get_object_or_404(
+            Patient,
+            user=self.request.user
+        )
 
     def get_serializer_class(self):
 

@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import (
+    DoctorProfileView,
     DoctorListCreateView,
     DoctorDetailView,
     AvailabilityListCreateView,
@@ -7,6 +8,13 @@ from .views import (
 )
 
 urlpatterns = [
+
+    path(
+        "profile/",
+        DoctorProfileView.as_view(),
+        name="doctor-profile",
+    ),
+
     path(
         "",
         DoctorListCreateView.as_view(),
@@ -18,6 +26,7 @@ urlpatterns = [
         DoctorDetailView.as_view(),
         name="doctor-detail",
     ),
+
     path(
         "availability/",
         AvailabilityListCreateView.as_view(),
@@ -29,4 +38,5 @@ urlpatterns = [
         AvailabilityDetailView.as_view(),
         name="availability-detail",
     ),
+
 ]
