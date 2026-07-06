@@ -98,7 +98,7 @@ form.addEventListener("submit", async function (e) {
             }
         );
 
-        const data = await response.json();
+        const text = await response.text();
 
         if (response.ok) {
 

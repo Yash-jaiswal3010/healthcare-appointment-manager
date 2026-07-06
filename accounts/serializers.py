@@ -27,30 +27,31 @@ class RegisterSerializer(serializers.ModelSerializer):
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField(write_only=True)
+def validate(self, attrs):
 
-    def validate(self, attrs):
-        user = authenticate(
-            email=attrs["email"],
-            password=attrs["password"]
-        )
+    email = attrs["email"]
+    password = attrs["password"]
 
-        if not user:
-            raise serializers.ValidationError(
-                "Invalid email or password"
-            )
+    user = authenticate(
+        username=email,
+        password=password,
+    )
 
-        refresh = RefreshToken.for_user(user)
+    if user is None:
+        raise serializers.ValidationError("Invalid email or password")
 
-        return {
-            "refresh": str(refresh),
-            "access": str(refresh.access_token),
-            "user": {
-                "id": user.id,
-                "full_name": user.full_name,
-                "email": user.email,
-                "role": user.role,
-            },
-        }
+    refresh = RefreshToken.for_user(user)
+
+    return {
+        "refresh": str(refresh),
+        "access": str(refresh.access_token),
+        "user": {
+            "id": user.id,
+            "full_name": user.full_name,
+            "email": user.email,
+            "role": user.role,
+        },
+    }
     
 class ProfileSerializer(serializers.ModelSerializer):
 
