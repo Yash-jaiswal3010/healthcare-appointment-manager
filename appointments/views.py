@@ -67,19 +67,19 @@ class AppointmentListCreateView(
         patient=patient
         )
 
-        appointment.symptom_summary = generate_symptom_summary(
-            appointment.symptoms
-        )
+        # appointment.symptom_summary = generate_symptom_summary(
+           # appointment.symptoms
+        #)
 
-        appointment.save(
-            update_fields=["symptom_summary"]
-        )
+        #appointment.save(
+         #   update_fields=["symptom_summary"]
+        #)
 
         read_serializer = AppointmentReadSerializer(
             appointment
         )
         # Send email notification
-        send_appointment_booked_email(appointment)
+        # send_appointment_booked_email(appointment)
 
         read_serializer = AppointmentReadSerializer(
         appointment

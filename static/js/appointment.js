@@ -98,19 +98,15 @@ form.addEventListener("submit", async function (e) {
             }
         );
 
-        const text = await response.text();
+       const text = await response.text();
 
         if (response.ok) {
-
             alert("Appointment booked successfully!");
-
             window.location.href = "/patient/appointments/";
-
-        } else {
-
-            alert(JSON.stringify(data));
-
-        }
+            } else {
+            console.log(text);
+            alert(text);
+            }
 
     } catch (error) {
 
