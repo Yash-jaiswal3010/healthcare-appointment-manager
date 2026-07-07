@@ -1,3 +1,4 @@
+const API_BASE = "/api";
 const token = localStorage.getItem("access");
 
 if (!token) {
@@ -9,15 +10,15 @@ async function loadAppointments() {
     try {
 
         const response = await fetch(
-            `${API_BASE}/auth/logout/`,
-            {
-                method: "GET",
-                headers: {
-                    "Authorization": "Bearer " + token,
-                    "Content-Type": "application/json"
-                }
-            }
-        );
+    `${API_BASE}/appointments/`,
+    {
+        method: "GET",
+        headers: {
+            "Authorization": "Bearer " + token,
+            "Content-Type": "application/json",
+        },
+    }
+);
 
         if (!response.ok) {
             throw new Error("Failed to fetch appointments");
